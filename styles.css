@@ -2,4 +2,15 @@ body {
     margin: 0;
 
     height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    outline: red solid 1px;
+
+    width: 700px;
+    height: 700px;
 }
