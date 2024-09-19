@@ -1,5 +1,13 @@
 let gridContainer = document.querySelector('.grid-container');
 
+gridContainer.addEventListener('mousemove', (event) => {
+    if (event.target.classList.contains('gc-box'))
+    {
+        let box = event.target;
+        box.style['background-color'] = 'black';
+    }
+});
+
 const createBox = (width, height) => {
     let box = document.createElement('div');
     box.style['width'] = width + 'px';
@@ -19,7 +27,6 @@ const cleanGridContainer = () => {
 };
 
 const setupGrid = (rows, cols) => {
-
     cleanGridContainer();
 
     let gridContainerWidth = gridContainer.clientWidth;
