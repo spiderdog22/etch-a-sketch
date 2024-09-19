@@ -6,6 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 40px;
 }
 
 .grid-container {
@@ -16,6 +17,15 @@ body {
 
     display: flex;
     flex-wrap: wrap;
+}
+
+.left-bar {
+    outline: green solid 1px;
+    width: 300px;
+    height: 700px;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .gc-box {
