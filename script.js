@@ -8,6 +8,12 @@ const randCssRGB = () => {
     return '' + red + ', ' + green + ', ' + blue;
 };
 
+const getCssAlpha = (css) => {
+    if (css.split(',').length < 4)
+        return '1.0';
+    return css.slice(css.lastIndexOf(',') + 1, css.lastIndexOf(')'));
+};
+
 const solidColor = (event) => {
     if (event.target.classList.contains('gc-box'))
     {
@@ -29,11 +35,7 @@ const darkeningEffect = (event) => {
     {
         let box = event.target;
         let bcStyle = box.style['background-color'];
-
-        if (bcStyle.split(',').length < 4)
-            return;
-
-        let alpha = parseFloat(bcStyle.slice(bcStyle.lastIndexOf(',') + 1, bcStyle.lastIndexOf(')')));
+        let alpha = parseFloat(getCssAlpha(bcStyle));
         let newRgba = 'rgba(0, 0, 0, ' + (alpha > 1.0 ? 1.0 : alpha + 0.1) + ')';
         box.style['background-color'] = newRgba;
     }
