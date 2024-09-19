@@ -1,10 +1,11 @@
 let gridContainer = document.querySelector('.grid-container');
 
-gridContainer.addEventListener('mousemove', (event) => {
+gridContainer.addEventListener('mouseover', (event) => {
     if (event.target.classList.contains('gc-box'))
     {
         let box = event.target;
-        box.style['background-color'] = 'black';
+        let newOpacity = parseFloat(box.style.opacity) + 0.1;
+        box.style.opacity = '' + newOpacity;
     }
 });
 
@@ -12,6 +13,7 @@ const createBox = (width, height) => {
     let box = document.createElement('div');
     box.style['width'] = width + 'px';
     box.style['height'] = height + 'px';
+    box.style['opacity'] = '' + 0.0;
     box.classList.add('gc-box');
     return box;
 };

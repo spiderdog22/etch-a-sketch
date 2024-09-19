@@ -20,4 +20,6 @@ body {
 
 .gc-box {
     outline: gainsboro solid 1px;
+    background-color: black;
+    opacity: 0.0;
 }
