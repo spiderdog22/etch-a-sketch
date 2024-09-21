@@ -10,6 +10,8 @@ body {
     justify-content: center;
     align-items: center;
     gap: 40px;
+
+    user-select: none;
 }
 
 .grid-container {
