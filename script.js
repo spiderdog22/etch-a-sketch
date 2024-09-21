@@ -1,5 +1,51 @@
 let gridContainer = document.querySelector('.grid-container');
 
+let genGridBtn = document.querySelector('#gen-grid');
+genGridBtn.addEventListener('click', () => {
+    let numRowInput = document.querySelector('#set-row');
+    let numColInput = document.querySelector('#set-col');
+
+    let rowValue = Number.parseInt(numRowInput.value);
+    let colValue = Number.parseInt(numColInput.value);
+
+    if (Number.isInteger(rowValue) && Number.isInteger(colValue)) {
+
+        if (rowValue >= 0 && rowValue <= 100 && colValue >= 0 && colValue <= 100) {
+            setupGrid(rowValue, colValue);
+        } else {
+            alert('Error: Entered values out of range.\n Only allowed between 0 and 100.');
+            numRowInput.value = '';
+            numColInput.value = '';
+            numRowInput.focus();
+        }
+    } else {
+        alert('Set valid values: integers.')
+        numRowInput.value = '';
+        numColInput.value = '';
+        numRowInput.focus();
+    }
+});
+
+const GRIDBOX_DEFAULTCOLOR = '#dcdcdc';
+const DEFAULT_SOLID_COLOR = '#000000';
+let gridActualColor = GRIDBOX_DEFAULTCOLOR;
+let actualSolidColor = DEFAULT_SOLID_COLOR;
+
+let gridColorInput = document.querySelector('#set-grid-color');
+gridColorInput.value = GRIDBOX_DEFAULTCOLOR;
+gridColorInput.addEventListener('change', (event) => {
+    gridActualColor = event.target.value;
+
+    gridContainer.childNodes.forEach((element)=>{
+        element.style['outline-color'] = gridActualColor;
+    })
+});
+
+let solidColorInput = document.querySelector('#set-solid-color');
+solidColorInput.addEventListener('input', (event) => {
+    actualSolidColor = event.target.value;
+});
+
 const randCssRGB = () => {
     let red = Math.trunc((Math.random() * 1000) % 256);
     let green = Math.trunc((Math.random() * 1000) % 256);
@@ -18,6 +64,7 @@ const solidColor = (event) => {
     if (event.target.classList.contains('gc-box'))
     {
         let box = event.target;
+        box.style.backgroundColor = actualSolidColor;
         box.style.opacity = '1.0';
     }
 };
@@ -41,7 +88,7 @@ const darkeningEffect = (event) => {
     }
 };
 
-gridContainer.addEventListener('mouseover', darkeningEffect);
+gridContainer.addEventListener('mouseover', solidColor);
 // gridContainer.addEventListener('mousemove', randomColorEffect);
 
 const createBox = (width, height) => {
@@ -49,6 +96,7 @@ const createBox = (width, height) => {
     box.style['width'] = width + 'px';
     box.style['height'] = height + 'px';
     box.style['background-color'] = 'rgba(0, 0, 0, 0.0)';
+    box.style['outline'] = gridActualColor + ' solid 1px';
     box.classList.add('gc-box');
     return box;
 };
@@ -71,8 +119,6 @@ const setupGrid = (rows, cols) => {
 
     let boxWidth = gridContainerWidth / rows;
     let boxHeight = gridContainerHeight / cols;
-
-    console.log(boxWidth, boxHeight);
     
     for (let i = 0; i < rows * cols; i++) {
         let box = createBox(boxWidth, boxHeight);
