@@ -11,6 +11,8 @@ genGridBtn.addEventListener('click', () => {
     if (Number.isInteger(rowValue) && Number.isInteger(colValue)) {
 
         if (rowValue >= 0 && rowValue <= 100 && colValue >= 0 && colValue <= 100) {
+            if (!gridContainer.hasChildNodes())
+                toggleModes();
             setupGrid(rowValue, colValue);
         } else {
             alert('Error: Entered values out of range.\n Only allowed between 0 and 100.');
@@ -36,9 +38,11 @@ gridColorInput.value = GRIDBOX_DEFAULTCOLOR;
 gridColorInput.addEventListener('change', (event) => {
     gridActualColor = event.target.value;
 
-    gridContainer.childNodes.forEach((element)=>{
-        element.style['outline-color'] = gridActualColor;
-    })
+    if (gridContainer.hasChildNodes()) {
+        gridContainer.childNodes.forEach((element)=>{
+            element.style['outline-color'] = gridActualColor;
+        })
+    }
 });
 
 let solidColorInput = document.querySelector('#set-solid-color');
@@ -61,6 +65,14 @@ const getCssAlpha = (css) => {
 };
 
 let modesPanel = document.querySelector('.modes');
+
+const toggleModes = () => {
+    modesPanel.childNodes.forEach((element) => {
+        if (element.nodeName === 'BUTTON') {
+            element.disabled = !element.disabled;
+        }
+    });
+};
 
 const defaultMode = (event) => {
     // Do nothing
