@@ -60,7 +60,7 @@ const getCssAlpha = (css) => {
     return css.slice(css.lastIndexOf(',') + 1, css.lastIndexOf(')'));
 };
 
-const solidColor = (event) => {
+const solidColorMode = (event) => {
     if (event.target.classList.contains('gc-box'))
     {
         let box = event.target;
@@ -69,7 +69,7 @@ const solidColor = (event) => {
     }
 };
 
-const randomColorEffect = (event) => {
+const randomColorMode = (event) => {
     if (event.target.classList.contains('gc-box'))
     {
         let box = event.target;
@@ -77,7 +77,7 @@ const randomColorEffect = (event) => {
     }
 };
 
-const darkeningEffect = (event) => {
+const darkeningMode = (event) => {
     if (event.target.classList.contains('gc-box'))
     {
         let box = event.target;
@@ -88,7 +88,7 @@ const darkeningEffect = (event) => {
     }
 };
 
-gridContainer.addEventListener('mouseover', solidColor);
+// gridContainer.addEventListener('mouseover', solidColor);
 // gridContainer.addEventListener('mousemove', randomColorEffect);
 
 const createBox = (width, height) => {
