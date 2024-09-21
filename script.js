@@ -60,6 +60,12 @@ const getCssAlpha = (css) => {
     return css.slice(css.lastIndexOf(',') + 1, css.lastIndexOf(')'));
 };
 
+let modesPanel = document.querySelector('.modes');
+
+const defaultMode = (event) => {
+    // Do nothing
+}
+
 const solidColorMode = (event) => {
     if (event.target.classList.contains('gc-box'))
     {
@@ -87,6 +93,22 @@ const darkeningMode = (event) => {
         box.style['background-color'] = newRgba;
     }
 };
+
+let selectedMode = defaultMode;
+
+modesPanel.addEventListener('click', (event) => {
+    const id = event.target.id;
+
+    switch(id) {
+        case 'mode-solid-color': selectedMode = solidColorMode; break;
+        case 'mode-darkening': selectedMode = darkeningMode; break;
+        case 'mode-random': selectedMode = randomColorMode; break;
+    }
+});
+
+gridContainer.addEventListener('mouseover', (event) => {
+    selectedMode(event);
+});
 
 // gridContainer.addEventListener('mouseover', solidColor);
 // gridContainer.addEventListener('mousemove', randomColorEffect);
